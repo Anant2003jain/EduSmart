@@ -6,6 +6,7 @@ from azure.ai.textanalytics import TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
 import os
 from dotenv import load_dotenv
+from docx import Document
 
 # Get configuration settings 
 load_dotenv()
@@ -56,7 +57,7 @@ def extract_text_from_pdf(file):
 def summarize_text(text):
     try:
         # Create a system message
-        system_message = f"Please Summarize this content so that I can easily understand important topics. Ensure all topics will covered and point out important things from given content.:\n{text}. Summarize each topic in detail so I will understand everythong.\nPlease always take care of output formatting, it should be well formatted like: Topic,Headings,Subheadings,points and paragraphs"
+        system_message = f"You are a great teacher, Summarize given content in detail. Ensure all topics wrer covered and point out important things from given content."
 
         # Initialize messages array
         messages_array = [{"role": "system", "content": system_message}]
@@ -106,6 +107,8 @@ def generate_quiz(input_text):
 
             like that..
             
+        Answers:
+
         Generate quize to prepare them for exams"""
 
     # Initialize messages array
@@ -139,7 +142,7 @@ def generate_quiz(input_text):
 def ask_question(question, context):
     try:
         # Create a system message
-        system_message = f"Based on this text, answer the following question:\n{context}\n\nQuestion: {question}\nAnswer:\n\nPlease always take care of output formatting, it should be well formatted. \nNote: Only answers to the questions related to content only, if any questions are not related to the context(content) deny to answer them and simply tell them that you can only answer to the topic related questions questions. Remember maybe the question user asking for maybe related to content so please dont be so strict."
+        system_message = f"Use this content: {context} as a reference and Answer the given question. Please always take care of output formatting, it should be well formatted.\n\n Answer questions that are related to study and education."
 
         # Initialize messages array
         messages_array = [{"role": "system", "content": system_message}]
@@ -161,3 +164,12 @@ def ask_question(question, context):
     except Exception as e:
         st.error(f"Error during Q&A: {e}")
         return None
+    
+#Function to save extracted text into a .docx file"""
+def save_text_as_docx(text, file_name='extracted_docx_files//textextracted.docx'):
+    doc = Document()
+    if text!=None:
+        for line in text.splitlines():
+            doc.add_paragraph(line)
+        
+        doc.save(file_name)

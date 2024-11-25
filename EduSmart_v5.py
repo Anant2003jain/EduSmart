@@ -11,12 +11,12 @@ def stream_answer():
         time.sleep(0.02)
 
 def stream_summary():
-    for word in summary.split(" "):
+    for word in summary_text.split(" "):
         yield word + " "
         time.sleep(0.02)
 
 def stream_quiz():
-    for word in quiz.split(" "):
+    for word in quiz_text.split(" "):
         yield word + " "
         time.sleep(0.02)
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
                     if st.button("Re-Quiz"):
                         if 'quiz' in st.session_state:
-                            del st.session_state.quiz  # Delete existing quiz
+                            del st.session_state.quiz   # Delete existing quiz
 
                     # Clear Chat History, Re-Summarize, Re-Quiz buttons
                     if st.button("Clear Chat History"):
@@ -124,7 +124,18 @@ if __name__ == "__main__":
                                 if summary:
                                     st.session_state.summary = summary
                                     st.success("Summary generated successfully!")
+                                    summary_text=""
+                                    for line in summary.splitlines():
+                                        summary_text+=line+"\n\n"
                                     st.write_stream(stream_summary)
+
+                            save_text_as_docx(summary,file_name="temp_downloaded_files//summary.docx")
+                            st.success("Summary is saved and ready for download.")
+                            with open("temp_downloaded_files//summary.docx", "rb") as file:
+                                st.download_button(label="Download .docx",
+                                               data=file,
+                                               file_name="Summary.docx",
+                                               mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
                     else:
                         st.write(st.session_state.summary)
         
@@ -138,7 +149,18 @@ if __name__ == "__main__":
                                 if quiz:
                                     st.session_state.quiz = quiz
                                     st.success("Quiz generated successfully!")
+                                    quiz_text=""
+                                    for line in quiz.splitlines():
+                                        quiz_text+=line+"\n\n"
                                     st.write_stream(stream_quiz)
+
+                            save_text_as_docx(quiz,file_name="temp_downloaded_files//quiz.docx")
+                            st.success("Quiz is saved and ready for download.")
+                            with open("temp_downloaded_files//quiz.docx", "rb") as file:
+                                st.download_button(label="Download .docx",
+                                               data=file,
+                                               file_name="Quiz.docx",
+                                               mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
                     else:
                         st.write(st.session_state.quiz)
 
@@ -155,6 +177,8 @@ if __name__ == "__main__":
                             with st.chat_message(message['role']):
                                 st.write(message['content'])
 
+                        qna = ""
+
                         # Use chat_input for new question input
                         if user_input := st.sidebar.chat_input("Ask a question about the content:"):
                             # User's message
@@ -164,6 +188,7 @@ if __name__ == "__main__":
                                 # Display user's question in the chat
                                 with st.chat_message('user'):
                                     st.write(user_input)
+                                    qna+=f"Question: {user_input}"
 
                                 # AI's response
                                 with st.spinner("Processing your question..."):
@@ -174,9 +199,20 @@ if __name__ == "__main__":
                                         # Display AI's answer in the chat
                                         with st.chat_message('assistant'):
                                             st.write_stream(stream_answer)
+
+                                    qna+=f"\nAnswer: {answer}\n\n"
                     
                             except Exception as e:
                                 st.write("Any problem occured, please re submit your question!")
+
+
+                            save_text_as_docx(qna,file_name="temp_downloaded_files//realtime_qna.docx")
+                            st.success("QnA is saved and ready for download.")
+                            with open("temp_downloaded_files//realtime_qna.docx", "rb") as file:
+                                st.download_button(label="Download .docx",
+                                               data=file,
+                                               file_name="QnA.docx",
+                                               mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
 
                     except Exception as e:
                                 st.write("Any problem occured, please re submit your question!")
