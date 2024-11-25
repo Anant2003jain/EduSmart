@@ -3,3 +3,4 @@ azure-core
 azure-ai-formrecognizer
 azure-ai-textanalytics
 python-dotenv
+docx
