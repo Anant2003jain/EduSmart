@@ -55,27 +55,34 @@ This will start the app and open it in your default web browser.
 3. **Create Quizzes**: Generate a quiz from the content by clicking **Generate Quiz**. This will produce a mix of multiple-choice, fill-in-the-blank, and short-answer questions.
 4. **Real-Time Q&A**: Ask questions about the document in the **Real-Time Q&A** tab and get immediate answers from the system.
 
-## Screenshots 📸
-
-Here are some screenshots of EduSmart in action:
-
-### 1. **Main Interface**
-![EduSmart Main Interface](assets/main_interface.png)
-
-### 2. **Summary Tab**
-![Summary Tab](assets/summary_tab.png)
-
-### 3. **Quiz Tab**
-![Quiz Tab](assets/quiz_tab.png)
-
-### 4. **Real-Time Q&A Tab**
-![Real-Time Q&A](assets/qa_tab.png)
 
 ## Video Demonstration 🎥
 
 Check out this video demonstration to see EduSmart in action:
 
-[![EduSmart Demo](https://img.youtube.com/vi/your_video_id/0.jpg)](https://www.youtube.com/watch?v=your_video_id)
+https://github.com/user-attachments/assets/15fce04b-ba57-4db9-97db-c1ed79f94548
+
+
+## Screenshots 📸
+
+Here are some screenshots of EduSmart in action:
+
+### 1. **Main Interface**
+![EduSmart Main Interface](https://github.com/user-attachments/assets/7d81e315-ff1b-4d57-b0f5-6d9eac7cce09)
+
+
+### 2. **Summary Tab**
+![Summary Tab](https://github.com/user-attachments/assets/c93085fe-9f94-4a44-9c76-ec24f6d45d31)
+
+
+### 3. **Quiz Tab**
+![Quiz Tab](https://github.com/user-attachments/assets/224f9731-ad05-4f7a-a290-f7333828663d)
+
+
+### 4. **Real-Time Q&A Tab**
+![Real-Time Q&A](https://github.com/user-attachments/assets/834b7af4-7d50-4c86-accf-349202faf916)
+
+
 
 ## Technologies Used ⚙️
 
