@@ -22,9 +22,8 @@ oai_key = os.getenv("AZURE_OAI_KEY")
 oai_model = os.getenv("AZURE_OAI_DEPLOYMENT")
 oai_version = os.getenv("AZURE_OAI_VERSION")
 
-# Initialize Azure clients
+# Initialize Azure form clients
 form_recognizer_client = DocumentAnalysisClient(endpoint=doc_endpoint, credential=AzureKeyCredential(doc_key))
-language_client = TextAnalyticsClient(endpoint=lang_endpoint, credential=AzureKeyCredential(lang_key))
 
 # Initialize the Azure OpenAI client
 client = AzureOpenAI(
