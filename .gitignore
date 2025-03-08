@@ -1,1 +1,4 @@
-.env
+#.env
+temp_downloaded_files/
+Documentation/
+__pycache__/
